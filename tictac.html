@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+   <html>
+   <head>
+   <meta charset="UTF-8">
+   <title> Tic Tac Toe </title>
+   <link rel="icon" type="image/x-icon" href="images/favicon5.ico" />
+   <style type="text/css">
+   body{font-family:arial; }
+   .main{ padding:1.7em; border: 4px solid orange; border-radius:20px;}
+   .wins{border: 2px solid black;float:right;}
+   h2{text-align:center; color:orange;text-shadow: 2px 1px 2px darkgrey;}
+   table {border-collapse:collapse;border:3px solid white;}
+   th {border:2px solid black; color: orange;}
+   td {height: 40px; width:40px !important; border:2px solid black; text-align:center;}
+   </style>
+   <script type="text/javascript" src="js/ajaxReq.js"></script>
+   <script type="text/javascript">
+   /*******************************************************
+	Helper functions
+	********************************************************/
+	
+	
+		
+	 /************************************************************************
+   Event handlers
+   
+   *************************************************************************/   
+    var click, oWin, xWin, cat, soundfile;
+        click=1;
+        oWin =0;
+        xWin =0;
+        cat = 0;
+        soundfile = "audio/button3.mp3";
+        
+    function playsound(){
+document.getElementById("soundeffect").innerHTML=
+ "<embed src=\""+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+}
+    function winner(h)
+    { 
+    if (h=="x")
+    {
+    xWin+=1;
+    document.getElementById(h).innerHTML= xWin;
+    doNew();
+    }
+    if (h=="o")
+    {
+    oWin+=1;
+    document.getElementById(h).innerHTML= oWin;
+    doNew();
+    }
+    if (h=="cat")
+    {
+    cat+=1;
+    document.getElementById(h).innerHTML= cat;
+    doNew();
+    }
+    
+    }
+    
+    function checkWin()
+    {
+    var square1, square2, square3, square4, square5, square6, square7, square8, square9;
+   square1 = document.getElementById('1').innerHTML;
+   square2 = document.getElementById('2').innerHTML;
+   square3 = document.getElementById('3').innerHTML;
+   square4 = document.getElementById('4').innerHTML;
+   square5 = document.getElementById('5').innerHTML;
+   square6 = document.getElementById('6').innerHTML;
+   square7 = document.getElementById('7').innerHTML;
+   square8 = document.getElementById('8').innerHTML;
+   square9 = document.getElementById('9').innerHTML;
+   
+   if(square1 == "x" && square2 == "x" && square3 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square4 == "x" && square5 == "x" && square6 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square7 == "x" && square8 == "x" && square9 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square1 == "x" && square4 == "x" && square7 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square2 == "x" && square5 == "x" && square8 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square3 == "x" && square6 == "x" && square9 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square1 == "x" && square5 == "x" && square9 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square3 == "x" && square5 == "x" && square7 == "x")
+   {document.getElementById('msg').innerHTML = " X wins!";
+   winner("x");}
+   else if(square1 == "o" && square2 == "o" && square3 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square4 == "o" && square5 == "o" && square6 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square7 == "o" && square8 == "o" && square9 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square1 == "o" && square4 == "o" && square7 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square2 == "o" && square5 == "o" && square8 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square3 == "o" && square6 == "o" && square9 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square1 == "o" && square5 == "o" && square9 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square3 == "o" && square5 == "o" && square7 == "o")
+   {document.getElementById('msg').innerHTML = " O wins!";
+   winner("o");}
+   else if(square1 != "" && square2 != "" && square3 != "" && square4 != "" && square5 != "" && square6 != "" && square7 != "" && square8 != "" && square9 != "")
+   {document.getElementById('msg').innerHTML = "Cats Game!";
+   winner("cat");}
+    }
+  //-----------------------------------------------------------------------
+     
+    function turn(number) //*** Event Handler for a button click
+   {var data, place;
+   
+   place = 0;
+   data = document.getElementById(number).innerHTML;
+   if(data != "X" && data != "O")
+   {
+   if(click==1)
+   {
+   document.getElementById('msg').innerHTML = "";
+   document.getElementById(number).innerHTML="X";
+   document.getElementById(number).style.color= "white";
+   document.getElementById(number).style.backgroundColor= "red";
+   playsound();
+   checkWin();
+   click = 2;
+   alert(number);
+    }                       
+   else if(click==2)
+   {
+   document.getElementById('msg').innerHTML = "";
+   document.getElementById(number).innerHTML="O";
+   document.getElementById(number).style.color= "white";
+   document.getElementById(number).style.backgroundColor= "blue";
+   playsound();
+   checkWin();
+   click = 1;
+   alert(number);
+   }
+   }
+   }
+//-----------------------------------------------------------------------
+   function doNew()
+   {
+   document.getElementById('1').innerHTML = "";
+   document.getElementById('2').innerHTML = "";
+   document.getElementById('3').innerHTML = "";
+   document.getElementById('4').innerHTML = "";
+   document.getElementById('5').innerHTML = "";
+   document.getElementById('6').innerHTML = "";
+   document.getElementById('7').innerHTML = "";
+   document.getElementById('8').innerHTML = "";
+   document.getElementById('9').innerHTML = "";
+   
+   document.getElementById('1').style.backgroundImage = "";
+   document.getElementById('2').style.backgroundImage = "";
+   document.getElementById('3').style.backgroundImage = "";
+   document.getElementById('4').style.backgroundImage = "";
+   document.getElementById('5').style.backgroundImage = "";
+   document.getElementById('6').style.backgroundImage = "";
+   document.getElementById('7').style.backgroundImage = "";
+   document.getElementById('8').style.backgroundImage = "";
+   document.getElementById('9').style.backgroundImage = "";
+   }
+  //-----------------------------------------------------------------------
+   function over(num)
+   {
+   var value;
+   value = document.getElementById(num).innerHTML;
+   if(value != "X" && value != "O")
+   {
+   if(click==1){
+   document.getElementById(num).innerHTML= "<span style='color: lightgrey;'> X </span>";
+   document.getElementById(num).style.cursor= "pointer";
+   }
+   if(click==2){
+   document.getElementById(num).innerHTML= "<span style='color: lightgrey;'> O </span>";
+   document.getElementById(num).style.cursor= "pointer";
+   }
+   }
+   }
+   //-----------------------------------------------------------------------
+   function out(num)
+   {var value;
+   value = document.getElementById(num).innerHTML;
+   if(value != "X" && value != "O")
+   {
+   document.getElementById(num).innerHTML= "";
+   }
+   }
+    
+   /************************************************************************
+   End of JavaScript - Body of HTML Document Follows
+   
+   *************************************************************************/   
+   </script>
+   </head>
+   <body>
+    <h2>Welcome to 2 Player 10 x 10 Tic Tac Toe</h2>
+	<div class="main" style=" width: 450px; margin: 0 auto;">
+	<table id="grid" border="1" widh="100%">
+   			<tr>
+   				<td id="1"></td>
+   				<td id="2"></td>
+   				<td id="3"></td>
+   				<td id="4"></td>
+   				<td id="5"></td>
+   				<td id="6"></td>
+   				<td id="7"></td>
+   				<td id="8"></td>
+   				<td id="9"></td>
+   				<td id="10"></td>
+   			</tr>
+   			<tr>
+   				<td id="11">
+   				</td>
+   				<td id="12">
+   				</td>
+   				<td id="13">
+   				</td>
+   				<td id="14">
+   				</td>
+   				<td id="15">
+   				</td>
+   				<td id="16">
+   				</td>
+   				<td id="17">
+   				</td>
+   				<td id="18">
+   				</td>
+   				<td id="19">
+   				</td>
+   				<td id="20">
+   				</td>
+   			</tr>
+   			<tr>
+   				<td id="21">
+   				</td>
+   				<td id="22">
+   				</td>
+   				<td id="23">
+   				</td>
+   				<td id="24">
+   				</td>
+   				<td id="25">
+   				</td>
+   				<td id="26">
+   				</td>
+   				<td id="27">
+   				</td>
+   				<td id="28">
+   				</td>
+   				<td id="29">
+   				</td>
+   				<td id="30">
+   				</td>
+   			</tr>
+   			<tr>
+   				<td id="31">
+   				</td>
+   				<td id="32">
+   				</td>
+   				<td id="33">
+   				</td>
+   				<td id="34">
+   				</td>
+   				<td id="35">
+   				</td>
+   				<td id="36">
+   				</td>
+   				<td id="37">
+   				</td>
+   				<td id="38">
+   				</td>
+   				<td id="39">
+   				</td>
+   				<td id="40">
+   				</td>
+   			</tr>
+   			<tr>
+   				<td id="41">
+   				</td>
+   				<td id="42">
+   				</td>
+   				<td id="43">
+   				</td>
+   				<td id="44">
+   				</td>
+   				<td id="45">
+   				</td>
+   				<td id="46">
+   				</td>
+   				<td id="47">
+   				</td>
+   				<td id="48">
+   				</td>
+   				<td id="49">
+   				</td>
+   				<td id="50">
+   				</td>
+   			</tr>
+   			<tr>
+   				<td id="51" onclick="turn('51');" onmouseover="over('51')" onmouseout="out('51')"></td>
+   				<td id="52" onclick="turn('52');" onmouseover="over('52')" onmouseout="out('52')"></td>
+   				<td id="53" onclick="turn('53');" onmouseover="over('53')" onmouseout="out('53')"></td>
+   				<td id="54" onclick="turn('54');" onmouseover="over('54')" onmouseout="out('54')"></td>
+   				<td id="55" onclick="turn('55');" onmouseover="over('55')" onmouseout="out('55')"></td>
+   				<td id="56" onclick="turn('56');" onmouseover="over('56')" onmouseout="out('56')"></td>
+   				<td id="57" onclick="turn('57');" onmouseover="over('57')" onmouseout="out('57')"></td>
+   				<td id="58" onclick="turn('58');" onmouseover="over('58')" onmouseout="out('58')"></td>
+   				<td id="59" onclick="turn('59');" onmouseover="over('59')" onmouseout="out('59')"></td>
+   				<td id="60" onclick="turn('60');" onmouseover="over('60')" onmouseout="out('60')"></td>
+   			</tr>
+   			<tr>
+   				<td id="61" onclick="turn('61');" onmouseover="over('61')" onmouseout="out('61')"></td>
+   				<td id="62" onclick="turn('62');" onmouseover="over('62')" onmouseout="out('62')"></td>
+   				<td id="63" onclick="turn('63');" onmouseover="over('63')" onmouseout="out('63')"></td>
+   				<td id="64" onclick="turn('64');" onmouseover="over('64')" onmouseout="out('64')"></td>
+   				<td id="65" onclick="turn('65');" onmouseover="over('65')" onmouseout="out('65')"></td>
+   				<td id="66" onclick="turn('66');" onmouseover="over('66')" onmouseout="out('66')"></td>
+   				<td id="67" onclick="turn('67');" onmouseover="over('67')" onmouseout="out('67')"></td>
+   				<td id="68" onclick="turn('68');" onmouseover="over('68')" onmouseout="out('68')"></td>
+   				<td id="69" onclick="turn('69');" onmouseover="over('69')" onmouseout="out('69')"></td>
+   				<td id="70" onclick="turn('70');" onmouseover="over('70')" onmouseout="out('70')"></td>
+   			</tr>
+   			<tr>
+   				<td id="71" onclick="turn('71');" onmouseover="over('71')" onmouseout="out('71')"></td>
+   				<td id="72" onclick="turn('72');" onmouseover="over('72')" onmouseout="out('72')"></td>
+   				<td id="73" onclick="turn('73');" onmouseover="over('73')" onmouseout="out('73')"></td>
+   				<td id="74" onclick="turn('74');" onmouseover="over('74')" onmouseout="out('74')"></td>
+   				<td id="75" onclick="turn('75');" onmouseover="over('75')" onmouseout="out('75')"></td>
+   				<td id="76" onclick="turn('76');" onmouseover="over('76')" onmouseout="out('76')"></td>
+   				<td id="77" onclick="turn('77');" onmouseover="over('77')" onmouseout="out('77')"></td>
+   				<td id="78" onclick="turn('78');" onmouseover="over('78')" onmouseout="out('78')"></td>
+   				<td id="79" onclick="turn('79');" onmouseover="over('79')" onmouseout="out('79')"></td>
+   				<td id="80" onclick="turn('80');" onmouseover="over('80')" onmouseout="out('80')"></td>
+   			</tr>
+   			<tr>
+   				<td id="81" onclick="turn('81');" onmouseover="over('81')" onmouseout="out('81')"></td>
+   				<td id="82" onclick="turn('82');" onmouseover="over('82')" onmouseout="out('82')"></td>
+   				<td id="83" onclick="turn('83');" onmouseover="over('83')" onmouseout="out('83')"></td>
+   				<td id="84" onclick="turn('84');" onmouseover="over('84')" onmouseout="out('84')"></td>
+   				<td id="85" onclick="turn('85');" onmouseover="over('85')" onmouseout="out('85')"></td>
+   				<td id="86" onclick="turn('86');" onmouseover="over('86')" onmouseout="out('86')"></td>
+   				<td id="87" onclick="turn('87');" onmouseover="over('87')" onmouseout="out('87')"></td>
+   				<td id="88" onclick="turn('88');" onmouseover="over('88')" onmouseout="out('88')"></td>
+   				<td id="89" onclick="turn('89');" onmouseover="over('89')" onmouseout="out('89')"></td>
+   				<td id="90" onclick="turn('90');" onmouseover="over('90')" onmouseout="out('90')"></td>
+   			</tr>
+   			<tr>
+   				<td id="91" onclick="turn('91');" onmouseover="over('91')" onmouseout="out('91')"></td>
+   				<td id="92" onclick="turn('92');" onmouseover="over('92')" onmouseout="out('92')"></td>
+   				<td id="93" onclick="turn('93');" onmouseover="over('93')" onmouseout="out('93')"></td>
+   				<td id="94" onclick="turn('94');" onmouseover="over('94')" onmouseout="out('94')"></td>
+   				<td id="95" onclick="turn('95');" onmouseover="over('95')" onmouseout="out('95')"></td>
+   				<td id="96" onclick="turn('96');" onmouseover="over('96')" onmouseout="out('96')"></td>
+   				<td id="97" onclick="turn('97');" onmouseover="over('97')" onmouseout="out('97')"></td>
+   				<td id="98" onclick="turn('98');" onmouseover="over('98')" onmouseout="out('98')"></td>
+   				<td id="99" onclick="turn('99');" onmouseover="over('99')" onmouseout="out('99')"></td>
+   				<td id="100" onclick="turn('100');" onmouseover="over('100')" onmouseout="out('100')"></td>
+   			</tr>
+   		</table>
+   		</div>
+</br>
+   <table border="1" style="margin-left: auto; margin-right: auto;">
+	<tr>
+	<th width="150px">X Wins</th>
+	<th width="150px">O Wins</th>
+	<th width="150px">Cat's Games</th>
+	</tr>
+	<tr>
+	<th id="x">0</th>
+	<th id="o">0</th>
+	<th id="cat">0</th>
+	</tr>
+	</table> 
+	<div id="msg" class="center"></div>
+	<span id="soundeffect"></span>
+   </body>
+   </html>
