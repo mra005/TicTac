@@ -25,11 +25,13 @@
    Event handlers
    
    *************************************************************************/   
-    var click, oWin, xWin, cat, soundfile;
+    var click, oWin, xWin, cat, soundfile, xNumbers, oNumbers;
         click=1;
         oWin =0;
         xWin =0;
         cat = 0;
+        xNumbers = [];
+        oNumbers = [];
         soundfile = "audio/button3.mp3";
         
     function playsound(){
@@ -42,6 +44,7 @@ document.getElementById("soundeffect").innerHTML=
     {
     xWin+=1;
     document.getElementById(h).innerHTML= xWin;
+    document.getElementById('msg').innerHTML = "Winner!";
     doNew();
     }
     if (h=="o")
@@ -59,70 +62,43 @@ document.getElementById("soundeffect").innerHTML=
     
     }
     
-    function checkWin()
-    {
-    var square1, square2, square3, square4, square5, square6, square7, square8, square9;
-   square1 = document.getElementById('1').innerHTML;
-   square2 = document.getElementById('2').innerHTML;
-   square3 = document.getElementById('3').innerHTML;
-   square4 = document.getElementById('4').innerHTML;
-   square5 = document.getElementById('5').innerHTML;
-   square6 = document.getElementById('6').innerHTML;
-   square7 = document.getElementById('7').innerHTML;
-   square8 = document.getElementById('8').innerHTML;
-   square9 = document.getElementById('9').innerHTML;
-   
-   if(square1 == "x" && square2 == "x" && square3 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square4 == "x" && square5 == "x" && square6 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square7 == "x" && square8 == "x" && square9 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square1 == "x" && square4 == "x" && square7 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square2 == "x" && square5 == "x" && square8 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square3 == "x" && square6 == "x" && square9 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square1 == "x" && square5 == "x" && square9 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square3 == "x" && square5 == "x" && square7 == "x")
-   {document.getElementById('msg').innerHTML = " X wins!";
-   winner("x");}
-   else if(square1 == "o" && square2 == "o" && square3 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square4 == "o" && square5 == "o" && square6 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square7 == "o" && square8 == "o" && square9 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square1 == "o" && square4 == "o" && square7 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square2 == "o" && square5 == "o" && square8 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square3 == "o" && square6 == "o" && square9 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square1 == "o" && square5 == "o" && square9 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square3 == "o" && square5 == "o" && square7 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square1 != "" && square2 != "" && square3 != "" && square4 != "" && square5 != "" && square6 != "" && square7 != "" && square8 != "" && square9 != "")
-   {document.getElementById('msg').innerHTML = "Cats Game!";
-   winner("cat");}
+    function sortNumber(a,b) {
+   	 return a - b;
+	}
+	
+    function checkWin(user, id)
+    {//document.getElementById('msg').innerHTML = user;
+      if(user == "x")
+      {//alert(id);
+        xNumbers.sort(sortNumber); 
+        for	(index = 0; index < xNumbers.length; index++) {
+         // document.getElementById('msg').innerHTML += xNumbers[index] + " ";
+          var test = xNumbers[index];
+          var checker = 0;
+          truth = test + 20;
+          document.getElementById('msg').innerHTML += test + " ";
+          alert(truth);
+          var a = xNumbers.indexOf(test);
+          alert(a);
+          /**
+          while(a != -1)
+          {
+            checker ++;
+            if(checker==1){
+            winner("x");}
+            test + 10;
+            a = xNumbers.indexOf(test);
+          }
+          **/
+        }
+      }
+      if(user == "o")
+      { 
+        oNumbers.sort(sortNumber); 
+        for	(index = 0; index < oNumbers.length; index++) {
+          document.getElementById('msg').innerHTML += oNumbers[index] + " ";
+        }
+      }
     }
   //-----------------------------------------------------------------------
      
@@ -140,9 +116,10 @@ document.getElementById("soundeffect").innerHTML=
    document.getElementById(number).style.color= "white";
    document.getElementById(number).style.backgroundColor= "red";
    playsound();
-   checkWin();
+   xNumbers[xNumbers.length] = number;
+   checkWin("x", number);
    click = 2;
-   alert(number);
+   //alert(number);
     }                       
    else if(click==2)
    {
@@ -151,7 +128,8 @@ document.getElementById("soundeffect").innerHTML=
    document.getElementById(number).style.color= "white";
    document.getElementById(number).style.backgroundColor= "blue";
    playsound();
-   checkWin();
+   oNumbers[oNumbers.length] = number;
+   checkWin("o", number);
    click = 1;
    alert(number);
    }
