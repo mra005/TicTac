@@ -24,20 +24,18 @@
    /************************************************************************
    Event handlers
    *************************************************************************/   
-    var click, oWin, xWin, cat, soundfile, numbers, xNumbers, oNumbers, countup = 0, countdown = 0, countL = 0, countR = 0;
+    var click, oWin, xWin, cat, soundfile, numbers, moves = 0, countup = 0, countdown = 0;
         click=1;
         oWin =0;
         xWin =0;
         cat = 0;
         numbers = [100];
-        xNumbers = [];
-        oNumbers = [];
         soundfile = "audio/button3.mp3";
         
     function playsound(){
-document.getElementById("soundeffect").innerHTML=
- "<embed src=\""+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
-}
+		document.getElementById("soundeffect").innerHTML=
+		 "<embed src=\""+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+	}
     function winner(h)
     { 
     if (h=="x")
@@ -61,12 +59,9 @@ document.getElementById("soundeffect").innerHTML=
     alert("Cats Game!");
     doNew();
     }
-    
     }
-    
-    function sortNumber(a,b) {
-   	 return a - b;
-	}
+	
+	//-----------------------Counter Functions
 	
     function CountUp(id, xo) {
         countup = 1;
@@ -141,7 +136,7 @@ document.getElementById("soundeffect").innerHTML=
         return count;
     }
     
-    
+    //------------------------Checks for wins
     function checkWin(user, id)
     {
       if(user == "x")
@@ -151,12 +146,10 @@ document.getElementById("soundeffect").innerHTML=
         var test3 = CountLeft(id, "X");
         var test4 = CountRight(id, "X");
         var test5 = CountUpRight(id, "X");
+        var test7 = CountDownLeft(id, "X");
         var test8 = CountUpLeft(id, "X");
         var test6 = CountDownRight(id, "X");
-       // alert("test8=" + test8);
-        var test7 = CountDownLeft(id, "X");
         
-        //alert(test5);
         if(test + test2 > 5) 
         winner("x");
         if(test3 + test4 > 5) 
@@ -165,200 +158,36 @@ document.getElementById("soundeffect").innerHTML=
         winner("x");
         if(test6 + test8 > 5) 
         winner("x");
-        
       }
-      if(user == "o")
+      else if(user == "o")
       {
         var test = CountUp(id, "O");
         var test2 = CountDown(id, "O");
         var test3 = CountLeft(id, "O");
         var test4 = CountRight(id, "O");
+        var test5 = CountUpRight(id, "O");
+        var test7 = CountDownLeft(id, "O");
+        var test8 = CountUpLeft(id, "O");
+        var test6 = CountDownRight(id, "O");
         if(test + test2 > 5) 
         winner("o");
         if(test3 + test4 > 5) 
         winner("o");
+        if(test5 + test7 > 5) 
+        winner("o");
+        if(test6 + test8 > 5) 
+        winner("o");
       }
+      if(moves == 100)
+      winner("cat");
     }
-   /**
-    {//document.getElementById('msg').innerHTML = user;
-      if(user == "x")
-      {//alert(id);
-        xNumbers.sort(sortNumber); 
-        for	(index = 0; index < xNumbers.length; index++) {
-         // document.getElementById('msg').innerHTML += xNumbers[index] + " ";
-          var test = xNumbers[index];
-          var checker = 0;
-          truth = test + 20;
-          document.getElementById('msg').innerHTML += test + " ";
-          alert(truth);
-          var a = xNumbers.indexOf(test);
-          alert(a);
-          /**
-          while(a != -1)
-          {
-            checker ++;
-            if(checker==1){
-            winner("x");}
-            test + 10;
-            a = xNumbers.indexOf(test);
-          }
-          **//**
-        }
-      }
-      if(user == "o")
-      { 
-        oNumbers.sort(sortNumber); 
-        for	(index = 0; index < oNumbers.length; index++) {
-          document.getElementById('msg').innerHTML += oNumbers[index] + " ";
-        }
-      }
-    }**/
-/**
-    function checkWin(selectedTile) 
-    {
-    var square1, square2, square3, square4, square5, square6, square7, square8, square9,
-    x, check;
-        
-   square1 = document.getElementById('1').innerHTML;
-   square2 = document.getElementById('2').innerHTML;
-   square3 = document.getElementById('3').innerHTML;
-   square4 = document.getElementById('4').innerHTML;
-   square5 = document.getElementById('5').innerHTML;
-   square6 = document.getElementById('6').innerHTML;
-   square7 = document.getElementById('7').innerHTML;
-   square8 = document.getElementById('8').innerHTML;
-   square9 = document.getElementById('9').innerHTML;
-   square10 = document.getElementById('10').innerHTML;
-   square11 = document.getElementById('11').innerHTML;
-   square12 = document.getElementById('12').innerHTML;
-   square13 = document.getElementById('13').innerHTML;
-   square14 = document.getElementById('14').innerHTML;
-   square15 = document.getElementById('15').innerHTML;
-   square16 = document.getElementById('16').innerHTML;
-   square17 = document.getElementById('17').innerHTML;
-   square18 = document.getElementById('18').innerHTML;
-   square19 = document.getElementById('19').innerHTML;
-   square20 = document.getElementById('20').innerHTML;
-   square21 = document.getElementById('21').innerHTML;
-   square22 = document.getElementById('22').innerHTML;
-   square23 = document.getElementById('23').innerHTML;
-   square24 = document.getElementById('24').innerHTML;
-   square25 = document.getElementById('25').innerHTML;
-   square26 = document.getElementById('26').innerHTML;
-   square27 = document.getElementById('27').innerHTML;
-   square28 = document.getElementById('28').innerHTML;
-   square29 = document.getElementById('29').innerHTML;
-   square30 = document.getElementById('30').innerHTML;
-   square31 = document.getElementById('31').innerHTML;
-   square32 = document.getElementById('32').innerHTML;
-   square33 = document.getElementById('33').innerHTML;
-   square34 = document.getElementById('34').innerHTML;
-   square35 = document.getElementById('35').innerHTML;
-   square36 = document.getElementById('36').innerHTML;
-   square37 = document.getElementById('37').innerHTML;
-   square38 = document.getElementById('38').innerHTML;
-   square39 = document.getElementById('39').innerHTML;
-   square40 = document.getElementById('40').innerHTML;
-   square41 = document.getElementById('41').innerHTML;
-   square42 = document.getElementById('42').innerHTML;
-   square43 = document.getElementById('43').innerHTML;
-   square44 = document.getElementById('44').innerHTML;
-   square45 = document.getElementById('45').innerHTML;
-   square46 = document.getElementById('46').innerHTML;
-   square47 = document.getElementById('47').innerHTML;
-   square48 = document.getElementById('48').innerHTML;
-   square49 = document.getElementById('49').innerHTML;
-   square50 = document.getElementById('50').innerHTML;
-   square51 = document.getElementById('51').innerHTML;
-   square52 = document.getElementById('52').innerHTML;
-   square53 = document.getElementById('53').innerHTML;
-   square54 = document.getElementById('54').innerHTML;
-   square55 = document.getElementById('55').innerHTML;
-   square56 = document.getElementById('56').innerHTML;
-   square57 = document.getElementById('57').innerHTML;
-   square58 = document.getElementById('58').innerHTML;
-   square59 = document.getElementById('59').innerHTML;
-   square60 = document.getElementById('60').innerHTML;
-   square61 = document.getElementById('61').innerHTML;
-   square62 = document.getElementById('62').innerHTML;
-   square63 = document.getElementById('63').innerHTML;
-   square64 = document.getElementById('64').innerHTML;
-   square65 = document.getElementById('65').innerHTML;
-   square66 = document.getElementById('66').innerHTML;
-   square67 = document.getElementById('67').innerHTML;
-   square68 = document.getElementById('68').innerHTML;
-   square69 = document.getElementById('69').innerHTML;
-   square70 = document.getElementById('70').innerHTML;
-   square71 = document.getElementById('71').innerHTML;
-   square72 = document.getElementById('72').innerHTML;
-   square73 = document.getElementById('73').innerHTML;
-   square74 = document.getElementById('74').innerHTML;
-   square75 = document.getElementById('75').innerHTML;
-   square76 = document.getElementById('76').innerHTML;
-   square77 = document.getElementById('77').innerHTML;
-   square78 = document.getElementById('78').innerHTML;
-   square79 = document.getElementById('79').innerHTML;
-   square80 = document.getElementById('80').innerHTML;
-   square81 = document.getElementById('81').innerHTML;
-   square82 = document.getElementById('82').innerHTML;
-   square83 = document.getElementById('83').innerHTML;
-   square84 = document.getElementById('84').innerHTML;
-   square85 = document.getElementById('85').innerHTML;
-   square86 = document.getElementById('86').innerHTML;
-   square87 = document.getElementById('87').innerHTML;
-   square88 = document.getElementById('88').innerHTML;
-   square89 = document.getElementById('89').innerHTML;
-   square90 = document.getElementById('90').innerHTML;
-   square91 = document.getElementById('91').innerHTML;
-   square92 = document.getElementById('92').innerHTML;
-   square93 = document.getElementById('93').innerHTML;
-   square94 = document.getElementById('94').innerHTML;
-   square95 = document.getElementById('95').innerHTML;
-   square96 = document.getElementById('96').innerHTML;
-   square97 = document.getElementById('97').innerHTML;
-   square98 = document.getElementById('98').innerHTML;
-   square99 = document.getElementById('99').innerHTML;
-   square100 = document.getElementById('100').innerHTML;
-
-   check = document.getElementById(selectedTile).innerHTML;
-
-   while (x == check){
-	x = document.getElementById(selectedTile - 11).innerHTML //checks cell UP 1 LEFT 1
-	document.getElementById(selectedTile - 10).innerHTML //checks cell UP 1
-	document.getElementById(selectedTile - 9).innerHTML //checks cell UP 1 RIGHT 1
-	document.getElementById(selectedTile - 1).innerHTML //checks cell LEFT 1
-	document.getElementById(selectedTile + 1).innerHTML //checks cell RIGHT 1
-	document.getElementById(selectedTile + 9).innerHTML //checks cell DOWN 1 LEFT 1
-	document.getElementById(selectedTile + 10).innerHTML //checks cell DOWN 1
-	document.getElementById(selectedTile + 11).innerHTML //checks cell DOWN 1 RIGHT 1
-
-   }
-
-
-
    
-     {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square3 == "o" && square6 == "o" && square9 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square1 == "o" && square5 == "o" && square9 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square3 == "o" && square5 == "o" && square7 == "o")
-   {document.getElementById('msg').innerHTML = " O wins!";
-   winner("o");}
-   else if(square1 != "" && square2 != "" && square3 != "" && square4 != "" && square5 != "" && square6 != "" && square7 != "" && square8 != "" && square9 != "")
-   {document.getElementById('msg').innerHTML = "Cats Game!";
-   winner("cat");}
-    }
-    **/
   //-----------------------------------------------------------------------
      
     function turn(number) //*** Event Handler for a button click
    {var data, place;
-   
    place = 0;
+   moves ++;
    data = document.getElementById(number).innerHTML;
    if(data != "X" && data != "O")
    {
@@ -389,6 +218,7 @@ document.getElementById("soundeffect").innerHTML=
 //-----------------------------------------------------------------------
    function doNew()
    { i = 1;
+     moves = 0;
    while(i <= 100){
    	document.getElementById(i).innerHTML = "";
    	document.getElementById(i).style.backgroundColor= "white";
@@ -425,7 +255,6 @@ document.getElementById("soundeffect").innerHTML=
     
    /************************************************************************
    End of JavaScript - Body of HTML Document Follows
-   
    *************************************************************************/   
    </script>
    </head>
@@ -569,7 +398,6 @@ document.getElementById("soundeffect").innerHTML=
 	</tr>
 	</table> 
 	<div id="msg" class="center"></div>
-	 <button onclick="doNew()">Reset</button> 
 	<span id="soundeffect"></span>
    </body>
    </html>
