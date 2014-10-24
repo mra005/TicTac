@@ -89,6 +89,13 @@ document.getElementById("soundeffect").innerHTML=
     function CountLeft(id, xo) {
         var count = 1;
         id -= 1;
+        while(id = %10) {
+          if(% == 9) {
+            var count = 0;
+            id -= 0;
+          }
+        }
+        }
         while(numbers[id] == xo){
           id -= 1;
           count ++;
@@ -98,6 +105,13 @@ document.getElementById("soundeffect").innerHTML=
     function CountRight(id, xo) {
         var count = 1;
         id += 1;
+        while(id = %10) {
+          if(% == 0) {
+            var count = 0;
+            id += 0;
+          }
+        }
+        }
         while(numbers[id] == xo){
           id += 1;
           count ++;
